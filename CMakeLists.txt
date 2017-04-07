@@ -121,4 +121,4 @@ install(FILES
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Savitar
 )
 
-include(CPackConfig.cmake)
+# include(CPackConfig.cmake)
