@@ -94,7 +94,7 @@
         for (int i = 0; i < (int)sipCpp->size(); ++i)
         {
             SceneNode *cpp = new SceneNode(*sipCpp->at(i));
-            PyObject *pobj = sipConvertFromInstance(cpp, sipClass_SceneNode, sipTransferObj);
+            PyObject *pobj = sipConvertFromType(cpp, sipType_SceneNode, sipTransferObj);
 
             // Get the Python wrapper for the Type instance, creating a new
             // one if necessary, and handle any ownership transfer.
@@ -132,7 +132,7 @@
 
         while ((item = PyIter_Next(iterator)))
         {
-            if (!sipCanConvertToInstance(item, sipClass_SceneNode, SIP_NOT_NONE))
+            if (!sipCanConvertToType(item, sipType_SceneNode, SIP_NOT_NONE))
             {
                 PyErr_Format(PyExc_TypeError, "object in iterable cannot be converted to SceneNode");
                 *sipIsErr = 1;
@@ -140,14 +140,14 @@
             }
 
             int state;
-            SceneNode* p = reinterpret_cast<SceneNode*>(sipConvertToInstance(item, sipClass_SceneNode, 0, SIP_NOT_NONE, &state, sipIsErr));
+            SceneNode* p = reinterpret_cast<SceneNode*>(sipConvertToType(item, sipType_SceneNode, 0, SIP_NOT_NONE, &state, sipIsErr));
 
             if (!*sipIsErr)
             {
                 result_vector->push_back(p);
             }
 
-            sipReleaseInstance(p, sipClass_SceneNode, state);
+            sipReleaseType(p, sipType_SceneNode, state);
             Py_DECREF(item);
         }
 
