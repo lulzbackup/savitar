@@ -54,12 +54,13 @@ set(savitar_HDRS
     src/MeshData.h
     src/Vertex.h
     src/Face.h
+    src/SavitarExport.h
 )
 
 set(SAVITAR_VERSION 0.1.0)
 set(SAVITAR_SOVERSION 0)
 
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR})
 
 if(BUILD_STATIC)
     add_library(Savitar STATIC ${savitar_SRCS})

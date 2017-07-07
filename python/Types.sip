@@ -165,6 +165,44 @@
 };
 
 /**
+ * Convert to and from byte arrays.
+ * Uses the internal data vector directly to create/extract a PyBytes* instance.
+ */
+%MappedType bytearray
+{
+    %TypeHeaderCode
+    #include <vector>
+    #include <cstdint>
+    #include "Types.h"
+    %End
+
+    %ConvertFromTypeCode // From C++ to python
+        return PyBytes_FromStringAndSize(reinterpret_cast<const char *>(sipCpp->data()), sipCpp->size());
+    %End
+
+    %ConvertToTypeCode // From python to C++
+        if (sipIsErr == NULL)
+        {
+            return (PyBytes_Check(sipPy));
+        }
+
+        if (sipPy == Py_None)
+        {
+            *sipCppPtr = new bytearray;
+            return 1;
+        }
+
+        if (PyBytes_Check(sipPy))
+        {
+            uint8_t *buffer = reinterpret_cast<uint8_t *>(PyBytes_AS_STRING(sipPy));
+            *sipCppPtr = new bytearray(buffer, buffer + PyBytes_GET_SIZE(sipPy));
+            return 1;
+        }
+        return 0;
+    %End
+};
+
+/**
  * SIP generic implementation for std::vector<TYPE>
  */
 template<TYPE>
@@ -253,7 +291,7 @@ template<TYPE>
             return 0;
         }
 
-        *sipCppPtr = V;
+        *sipCppPtr = result_vector;
         return sipGetState(sipTransferObj);
     %End
 };

@@ -24,12 +24,12 @@ class MeshData
 public:
     MeshData();
     virtual ~MeshData();
-    PyObject* getFacesAsBytes();
-    PyObject* getVerticesAsBytes();
+    bytearray getVerticesAsBytes();
+    bytearray getFacesAsBytes();
 
-    PyObject* getFlatVerticesAsBytes();
+    bytearray getFlatVerticesAsBytes();
 
-    void setVerticesFromBytes(PyObject* py_bytes);
+    void setVerticesFromBytes(const bytearray& data);
 
-    void setFacesFromBytes(PyObject* py_bytes);
+    void setFacesFromBytes(const bytearray& data);
 };
