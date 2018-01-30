@@ -4,15 +4,15 @@
  * Copyright (C) 2017 Ultimaker b.v. <j.vankessel@ultimaker.com>
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
+ * it under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
+ * GNU Lesser General Public License for more details.
+ * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
@@ -61,7 +61,7 @@ std::string ThreeMFParser::sceneToString(Scene scene)
     for(int i = 0; i < scene.getAllSceneNodes().size(); i++)
     {
         SceneNode* scene_node = scene.getAllSceneNodes().at(i);
-        scene_node->setId(std::to_string(i));
+        scene_node->setId(std::to_string(i + 1));
     }
 
     for(SceneNode* scene_node: scene.getAllSceneNodes())
