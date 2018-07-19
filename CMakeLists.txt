@@ -6,9 +6,11 @@ include(CMakePackageConfigHelpers)
 
 option(BUILD_PYTHON "Build " ON)
 option(BUILD_STATIC "Build as a static library" OFF)
+option(BUILD_PUGIXML "Build internal pugixml library" ON)
 
-
-add_subdirectory(pugixml)
+if (BUILD_PUGIXML)
+    add_subdirectory(pugixml)
+endif()
 
 if(BUILD_PYTHON)
     set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
